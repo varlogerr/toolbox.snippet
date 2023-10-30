@@ -9,8 +9,12 @@
   end_of_line = lf
   charset = utf-8
   trim_trailing_whitespace = true
-  
+
   # markdown
   [*.{md,mdx}]
   trim_trailing_whitespace = false
 # {/SHLIB_GEN}
+
+[tests/fixture/**]
+insert_final_newline = false
+trim_trailing_whitespace = false
