@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Always here version placeholder
-declare SNIP_VERSION='dev' # {{ SNIP_VERSION /}}
+declare SNIP_VERSION='v20231106-d49623b' # {{ SNIP_VERSION /}}
 
 declare SNIP_TEST_RUNNER_DIR; SNIP_TEST_RUNNER_DIR="$(dirname -- "${0}")"
 

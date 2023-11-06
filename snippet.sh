@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Always here version placeholder
-declare SNIP_VERSION='dev' # {{ SNIP_VERSION /}}
+declare SNIP_VERSION='v20231106-d49623b' # {{ SNIP_VERSION /}}
 
 declare -A SNIP_CONF=(
   [content_url]=https://raw.githubusercontent.com
