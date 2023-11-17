@@ -155,18 +155,6 @@ snip_import_env() {
   done
 }
 
-{
-  declare -A SNIP_MODULE_TO_FNAMES SNIP_FNAME_TO_FDEF SNIP_CMD_TO_FILE
-  snip_import_env || exit
-
-  # Load modules
-  # shellcheck disable=SC1090
-  . <(printf -- '%s\n' "${SNIP_FNAME_TO_FDEF[@]}")
-
-  # shellcheck disable=SC2034
-  declare SHLIB_NL; import_nl
-}
-
 # All before here can be sourced
 (return 0 &>/dev/null) && return
 
@@ -186,6 +174,18 @@ _iife_opts() {
     shift
   done
 }; _iife_opts "${@}"; unset _iife_opts
+
+{ # Import environment
+  declare -A SNIP_MODULE_TO_FNAMES SNIP_FNAME_TO_FDEF SNIP_CMD_TO_FILE
+  snip_import_env || exit
+
+  # Load modules
+  # shellcheck disable=SC1090
+  . <(printf -- '%s\n' "${SNIP_FNAME_TO_FDEF[@]}")
+
+  # shellcheck disable=SC2034
+  declare SHLIB_NL; import_nl
+} # Import environment
 
 # shellcheck disable=SC1090
 . <(cat <<< "${SNIP_CMD_TO_FILE[shlib]}") || exit
