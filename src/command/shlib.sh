@@ -26,7 +26,7 @@ shlib_gen_dummy() {
 
 shlib_filter_public_fnames() {
   declare -a forbidden_suffix=(
-    _ .meta meta_ .test shlib_test_
+    _ .meta meta_ .test shlib_test
   )
   declare grep_script; grep_script="^\\($(
     printf -- '%s\n' "${forbidden_suffix[@]}" | escape_sed_expr \
@@ -60,13 +60,11 @@ shlib_print_help() {
     Generate snippets in place of placeholders.
 
     USAGE:
-      [SNIP_BRANCH=master] [SNIP_DEBUG=true] ${self} TARGET_FILE
-      [SNIP_BRANCH=master] [SNIP_DEBUG=true] ${self} OPTIONS
+      [SNIP_LOCAL=true] ${self} TARGET_FILE
+      [SNIP_LOCAL=true] ${self} OPTIONS
 
     ENV:
-      SNIP_GRANCH   Branch to work with
-      SNIP_DEBUG    Run in debug mode
-      SNIP_LOCAL    (bool) For local development, ignores SNIP_BRANCH
+      SNIP_LOCAL    (bool) For local development
 
     OPTIONS:
       -?, -h, --help  Print this help
@@ -106,17 +104,15 @@ shlib_placeholder_lines() (
   declare target="${1}"
 
   declare content; content="$(
-    "${SNIP_DBG_CMD[@]}"; cat -- "${target}" 2>/dev/null
+    cat -- "${target}" 2>/dev/null
   )" || return 1
 
   declare ptn_common='.\+#\s*{{\s*SNIP_SHLIB\s*}}\s*'
   declare ptn_start='.*{'"${ptn_common}"
   declare ptn_end='[0-9]\+-.*}'"${ptn_common}"
 
-  ("${SNIP_DBG_CMD[@]}"
     grep -n -x -m1 -A99999 "${ptn_start}" <<< "${content}" \
     | grep -x -m1 -B99999 "${ptn_end}" | sed -n '1p;$p' | grep -o '^[0-9]\+'
-  )
 )
 
 shlib_placeholder_default_txt() {
@@ -126,7 +122,7 @@ shlib_placeholder_default_txt() {
 
 shlib_get_import_items() {
   declare ptn='^\s*#\s*@\(.\+\)'
-  ("${SNIP_DBG_CMD[@]}"
+  (
     sed -n "${2},${3}p" -- "${1}" | tail -n +2 | grep -m1 -B99999 -v "${ptn}" \
     | grep "${ptn}" | sed 's/'"${ptn}"'/\1/' | sort -n | uniq
   )
@@ -217,5 +213,5 @@ else
   {
     echo
     shlib_placeholder_default_txt
-  } | ("${SNIP_DBG_CMD[@]}"; tee -a -- "${TARGET}" >/dev/null)
+  } | tee -a -- "${TARGET}" >/dev/null
 fi

@@ -5,6 +5,7 @@ Description
 * [Quick demo](#quick-demo)
 * [Installation](#installation)
 * [Usage](#usage)
+* [Development](#usage)
 
 ## Quick demo
 
@@ -23,6 +24,12 @@ Installation instructions
 ## Usage
 
 Usage instructions
+
+[To top]
+
+## Development
+
+For local development create `.snip.dev` in the project root to mark development environment.
 
 [To top]
 
