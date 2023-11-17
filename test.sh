@@ -5,7 +5,7 @@ declare SNIP_VERSION='v20231106-d49623b' # {{ SNIP_VERSION /}}
 
 declare SNIP_TEST_RUNNER_DIR; SNIP_TEST_RUNNER_DIR="$(dirname -- "${0}")"
 
-# Ensure local development run
+# Ensure local development
 SNIP_LOCAL=true . "${SNIP_TEST_RUNNER_DIR}/snippet.sh"
 # Ensure test lib is sourced
 . "${SNIP_TEST_RUNNER_DIR}/src/lib/shlib/test.sh"

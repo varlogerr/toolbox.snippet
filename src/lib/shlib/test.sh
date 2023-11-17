@@ -31,8 +31,8 @@ shlib_test() {
       -t|--title        ) OPTS_f1GlLuNQHx[title]="${2}"; shift ;;
       -b|--before       ) BEFORE_f1GlLuNQHx+=("${2}"); shift ;;
       -a|--after        ) AFTER_f1GlLuNQHx+=("${2}"); shift ;;
-      -o|--out|--stdout ) OPTS_f1GlLuNQHx[stdout]+="${OPTS_f1GlLuNQHx[stdout]+${SHLIB_NL}}${2}"; shift ;;
-      -e|--err|--stderr ) OPTS_f1GlLuNQHx[stderr]+="${OPTS_f1GlLuNQHx[stderr]+${SHLIB_NL}}${2}"; shift ;;
+      -o|--out|--stdout ) OPTS_f1GlLuNQHx[stdout]+="${OPTS_f1GlLuNQHx[stdout]+$'\n'}${2}"; shift ;;
+      -e|--err|--stderr ) OPTS_f1GlLuNQHx[stderr]+="${OPTS_f1GlLuNQHx[stderr]+$'\n'}${2}"; shift ;;
       -c|--rc           ) OPTS_f1GlLuNQHx[rc]="${2}"; shift ;;
       -O|--noout        ) OPTS_f1GlLuNQHx[noout]=true ;;
       -E|--noerr        ) OPTS_f1GlLuNQHx[noerr]=true ;;
